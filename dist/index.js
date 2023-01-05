@@ -9693,6 +9693,15 @@ const main = async () => {
         const repo = core.getInput('repo', { required: true });
         const token = core.getInput('token', { required: true });
         const octokit = new github.getOctokit(token);
+
+        await octokit.rest.teams.addOrUpdateRepoPermissionsInOrg({
+            org: 'ClevertecTest',
+            team_slug: 'Mentors',
+            owner,
+            repo,
+            permission: 'push'
+        });
+
         await octokit.rest.repos.updateBranchProtection({
             owner,
             repo,
@@ -9703,7 +9712,7 @@ const main = async () => {
                 required_approving_review_count: 1
             },
             restrictions: null,
-        })
+        });
 
     } catch (error) {
         core.setFailed(error.message);
