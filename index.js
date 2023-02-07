@@ -9,7 +9,7 @@ const main = async () => {
         const octokit = new github.getOctokit(token);
 
         await octokit.rest.teams.addOrUpdateRepoPermissionsInOrg({
-            org: 'ClevertecTest',
+            org: owner,
             team_slug: 'Mentors',
             owner,
             repo,
